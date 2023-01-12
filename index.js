@@ -21,7 +21,7 @@ app.use(cors());
 
 
 app.get("/",(req, res)=>{
-    res.send("hi this is kalai");
+    res.send("Thank you to see my portfolio");
 })
 
 
