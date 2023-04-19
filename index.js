@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(
   cors({
     // origin: "http://localhost:3000",
-    origin: "https://relaxed-pasca-55eed0.netlify.app/" || "http://localhost:3000",
+    origin:"http://localhost:3000",
     credentials: true,
   })
 );
@@ -42,6 +42,9 @@ app.post("/portfolio", async function (request, response) {
     .insertOne(dataWithDate);
 
   response.send(result);
+  if(response.acknowledged){
+
+  }
 });
 
 app.listen(PORT, ()=>{
