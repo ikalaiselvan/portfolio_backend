@@ -3,6 +3,8 @@ import cors from 'cors';
 import { MongoClient } from "mongodb";
 import newDateTime from "./date.js";
 
+import sendEmail from "./utils/sendEmail.js";
+
 // import .env file
 import dotenv from "dotenv";
 dotenv.config();
@@ -18,16 +20,18 @@ console.log("Mongodb is connected ...");
 
 app.use(express.json());
 app.use(
-  cors({
-    // origin: "http://localhost:3000",
-    origin:"http://localhost:3000",
-    credentials: true,
-  })
+  cors()
 );
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     credentials: true,
+//   })
+// );
 
 
 app.get("/",(req, res)=>{
-    res.send("Thank you to see my portfolio");
+    res.send("This is my portfolio");
 })
 
 
@@ -42,12 +46,21 @@ app.post("/portfolio", async function (request, response) {
     .insertOne(dataWithDate);
 
   response.send(result);
-  if(response.acknowledged){
-
+  if(result.acknowledged){
+    
+    // const link = `http://localhost:3000/passwordReset?name=${dataWithDate.name}&email=${dataWithDate.email}&message=${dataWithDate.message}`;
+    console.log("Email : ",dataWithDate.email)
+    await sendEmail(
+      dataWithDate.email,
+      "Recruiter from my portfolio ",
+      `name: ${dataWithDate.name},     email: ${dataWithDate.email},      message: ${dataWithDate.message}`
+    );
+    
   }
 });
 
 app.listen(PORT, ()=>{
     console.log("app is running on port :", PORT)
 })
+
 
