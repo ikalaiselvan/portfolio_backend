@@ -19,7 +19,8 @@ console.log("Mongodb is connected ...");
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    // origin: "http://localhost:3000",
+    origin: "https://relaxed-pasca-55eed0.netlify.app/" || "http://localhost:3000",
     credentials: true,
   })
 );
