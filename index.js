@@ -45,17 +45,15 @@ app.post("/portfolio", async function (request, response) {
     .collection("html")
     .insertOne(dataWithDate);
 
-  response.send(result);
+  response.status(200).send({result : result, data : dataWithDate});
   if(result.acknowledged){
     
-    // const link = `http://localhost:3000/passwordReset?name=${dataWithDate.name}&email=${dataWithDate.email}&message=${dataWithDate.message}`;
     console.log("Email : ",dataWithDate.email)
     await sendEmail(
       dataWithDate.email,
       "Recruiter from my portfolio ",
-      `name: ${dataWithDate.name},     email: ${dataWithDate.email},      message: ${dataWithDate.message}`
+      `name: ${dataWithDate.name},     email: ${dataWithDate.email},      message: ${dataWithDate.message}      default: kalai`
     );
-    
   }
 });
 

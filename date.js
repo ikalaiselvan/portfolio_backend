@@ -1,6 +1,3 @@
-
-
-
 let currentDate = new Date();
 let cDay = currentDate.getDate();
 let cMonth = currentDate.getMonth() + 1;
@@ -14,7 +11,9 @@ let time =
   ":" +
   currentDate.getSeconds();
 // console.log(time);
-let newDateTime = {date: date, time: time };
+time = time.toLocaleString();
+// console.log(time)
+let newDateTime = { date: date, time: time };
 // console.log(newDateTime);
 
 export default newDateTime;
